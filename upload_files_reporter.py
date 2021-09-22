@@ -3,7 +3,7 @@ from pathlib import Path
 import datetime
 import os # for os.listdir
 
-upload_folder = Path("D:\Distr")   #Temporart. Path will set in Main func
+upload_folder = Path("C:\Program Files")   #Temporart. Path will set in Main func
 
 def get_today_date():
     today = datetime.date.today
@@ -22,6 +22,7 @@ def write_report_file(dirs_list):
         for folder in dirs_list:
             entries_count +=1 
             f.write(str(entries_count) + ". " +  folder + "\n")
+            print(str(folder) + "is write" )
 
 def main(path): 
     if Path(path).exists:
