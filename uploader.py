@@ -14,7 +14,6 @@ FTP_PROJECT_PATH = Path(r"C:\prog\tmp\ftp") #add row
 
 def get_folders_list(results_path):
     CWD = os.getcwd()
-    
     return os.listdir(results_path)
 
 def last_version_parse(path_to_folder):
@@ -22,18 +21,15 @@ def last_version_parse(path_to_folder):
     upper_version = "v000"
     folders = os.listdir(os.getcwd())
     versions_list = re.findall(r'v\d{3}',str(folders))
-    list(num_list) = 0
-    for num in versions_list:
-        
 
     return versions_list
 
 def copy_dailies_to_ftp(d_src, ftp_dest):
-    pass
+    shutil.copy(d_src, ftp_dest + "/DAILIES")
 
 def copy_dpx_to_ftp(src, ftp_dest):
     ftp_dest =  Path(FTP_PROJECT_PATH).joinpath(RESULT_PATTERN[0])
-    shutil.copy(src,ftp_dest)
+    shutil.copy(src,ftp_dest.joinpath("DAILIES"))
 
 def copy_matte_to_ftp(src, matte_dst):
     shutil.copy(src, matte_dst)
