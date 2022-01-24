@@ -1,48 +1,43 @@
 import os
-# import subprocess
 import shutil
 import datetime
 from pathlib import Path
-from typing import OrderedDict
 import re
+import json
+from this import d
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
-PROJECT_PATH = Path(r"C:\Program Files") #add row
-FTP_PROJECT_PATH = Path(r"C:\prog\tmp\ftp") #add row
+PROJECT_PATH = Path(r"C:\prog\ref\TEST_PROJ") 
+FTP_PROJECT_PATH = Path(r"C:\prog\ref\poj1\ftp") #add row
 
 
-def get_folders_list(results_path):
-    CWD = os.getcwd()
-    return os.listdir(results_path)
+def get_shot_list(path):
 
-def last_version_parse(path_to_folder):
-    os.chdir(Path(path_to_folder))
+    return os.walk(path)
+
+def last_version_parse(path):
+    os.chdir(Path(path))
     upper_version = "v000"
     folders = os.listdir(os.getcwd())
     versions_list = re.findall(r'v\d{3}',str(folders))
-
     return versions_list
-
+3
 def copy_dailies_to_ftp(d_src, ftp_dest):
     shutil.copy(d_src, ftp_dest + "/DAILIES")
 
-def copy_dpx_to_ftp(src, ftp_dest):
-    ftp_dest =  Path(FTP_PROJECT_PATH).joinpath(RESULT_PATTERN[0])
-    shutil.copy(src,ftp_dest.joinpath("DAILIES"))
-
-def copy_matte_to_ftp(src, matte_dst):
-    shutil.copy(src, matte_dst)
-
-def write_report():
-    pass
-
-def get_date():
+def get_today_date():
     today = datetime.date.today()
     return today.strftime("%Y%m%d")
 
-# for f in (get_folders_list(PROJECT_PATH)):
-#     print(f)
+def get_status():
+    os.chdir(Path.absolute)
+    with open ("status.json", "r") as jfile:
+        jfile.read
+    json.loads(jsonData)
+    pass
 
 
-print(last_version_parse(FTP_PROJECT_PATH))
+shot_list = get_shot_list(PROJECT_PATH)
+for f in shot_list:
+    print(f)
