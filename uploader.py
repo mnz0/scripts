@@ -4,17 +4,26 @@ import datetime
 from pathlib import Path
 import re
 import json
-from this import d
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
-PROJECT_PATH = Path(r"C:\prog\ref\TEST_PROJ") 
+PROJECT_PATH = Path(r"C:\prog\ref\TEST_PROJ\SHOTS") 
 FTP_PROJECT_PATH = Path(r"C:\prog\ref\poj1\ftp") #add row
 
 
-def get_shot_list(path):
+def get_shot_list(): 
+    is_episode = False
+    episode_list = []
+    hot_db = []
+    folders_list = os.listdir(PROJECT_PATH)
+    for folder in folders_list:
+        if("SC" in folder or "EP" in folder or "S" in folder):
+            episode_list.append(PROJECT_PATH.joinpath(folder))
+    print(episode_list)
+    # return EP_list
 
-    return os.walk(path)
+
+
 
 def last_version_parse(path):
     os.chdir(Path(path))
@@ -22,7 +31,7 @@ def last_version_parse(path):
     folders = os.listdir(os.getcwd())
     versions_list = re.findall(r'v\d{3}',str(folders))
     return versions_list
-3
+
 def copy_dailies_to_ftp(d_src, ftp_dest):
     shutil.copy(d_src, ftp_dest + "/DAILIES")
 
@@ -36,8 +45,6 @@ def get_status():
         jfile.read
     json.loads(jsonData)
     pass
-
-
-shot_list = get_shot_list(PROJECT_PATH)
-for f in shot_list:
-    print(f)
+get_shot_list()
+# for i in lst:
+#     print(i)
