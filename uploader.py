@@ -13,13 +13,17 @@ FTP_PROJECT_PATH = Path(r"C:\prog\ref\poj1\ftp") #add row
 
 def get_shot_list(): 
     is_episode = False
+    shot_list = []
     episode_list = []
-    hot_db = []
+    shot_db = []
     folders_list = os.listdir(PROJECT_PATH)
-    for folder in folders_list:
-        if("SC" in folder or "EP" in folder or "S" in folder):
-            episode_list.append(PROJECT_PATH.joinpath(folder))
-    print(episode_list)
+    for ep_folder in folders_list:
+        if("SC" in ep_folder or "EP" in ep_folder or "S" in ep_folder):
+            episode_list.append(PROJECT_PATH.joinpath(ep_folder))
+    
+
+    for i in episode_list:
+        print(i)
     # return EP_list
 
 
