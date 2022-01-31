@@ -4,6 +4,7 @@ import datetime
 from pathlib import Path
 import re
 import json
+from traceback import print_tb
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
@@ -17,9 +18,14 @@ def get_shot_list():
     episode_list = []
     shot_db = []
     folders_list = os.listdir(PROJECT_PATH)
-    for ep_folder in folders_list:
+    for index, ep_folder in enumerate(folders_list): #index from enumerate
         if("SC" in ep_folder or "EP" in ep_folder or "S" in ep_folder):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
+        os.chdir(Path(episode_list.index(index)))
+        prev_cmd = Path.cwd()
+            
+    
+
     
 
     for i in episode_list:
