@@ -18,19 +18,17 @@ def get_shot_list():
     episode_list = []
     shot_db = []
     folders_list = os.listdir(PROJECT_PATH)
-    for index, ep_folder in enumerate(folders_list): #index from enumerate
-        if("SC" in ep_folder or "EP" in ep_folder or "S" in ep_folder):
+
+    for index, ep_folder in enumerate(folders_list): #get index from list dirs
+
+        if("SC" in ep_folder or "EP" in ep_folder or "S" or "SE" in ep_folder):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
-        os.chdir(Path(episode_list.index(index)))
-        prev_cmd = Path.cwd()
+            os.chdir(episode_list[index])
+            
             
     
 
     
-
-    for i in episode_list:
-        print(i)
-    # return EP_list
 
 
 
