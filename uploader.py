@@ -17,21 +17,22 @@ def get_shot_list():
     shot_list = []
     episode_list = []
     shot_db = []
+    os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
 
     for index, ep_folder in enumerate(folders_list): #get index from list dirs
 
         if("SC" in ep_folder or "EP" in ep_folder or "S" or "SE" in ep_folder):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
+            prew_cwd = Path.cwd()
             os.chdir(episode_list[index])
-            
-            
+            cur_cwd = Path.cwd()
+            scan_shot_list = [shot for shot in os.listdir(cur_cwd)]
+            for shot_index, shot in enumerate(scan_shot_list):
+                #TODO Dive into shot and append shot name to global path
+            os.chdir(r"..")
+    print(shot_list)
     
-
-    
-
-
-
 
 def last_version_parse(path):
     os.chdir(Path(path))
