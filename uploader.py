@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import json
 from traceback import print_tb
+import glob
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
@@ -20,12 +21,24 @@ def get_shot_list():
     shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
+    episode_size = 0
+
 
     for episode_index, ep_folder in enumerate(folders_list): #get index from list dirs
 
         if("SC" in ep_folder or "EP" in ep_folder or "S" or "SE" in ep_folder):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
-            # scan_shot_list = [shot for shot in os.listdir(cur_cwd)]
+
+    episode_size = len(episode_list)
+
+    while(episode_size != 0):
+
+ 
+        os.chdir(episode_list[episode_size-1])
+        print(Path.cwd())
+        episode_size -= 1
+        scan_shot_list = [shot for shot in os.listdir(cur_cwd)] # generator for light  list shots 
+        glob.glob("..")# up to ep list
 
     for shot_index,shot in enumerate(episode_list):
         
@@ -33,7 +46,6 @@ def get_shot_list():
 
                #TODO Dive into shot and append shot name to global path
             # os.chdir(prew_cwd)
-    print(shot_list)
     
 
 def last_version_parse(path):
