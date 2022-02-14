@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from ctypes import resize
+=======
+from errno import ENETUNREACH
+>>>>>>> b4191ae61ab5c5771f3dcdb817f638aa07d72c7f
 import os
 import shutil
 import datetime
@@ -6,6 +10,7 @@ from pathlib import Path
 import re
 import json
 from traceback import print_tb
+import glob
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
@@ -20,6 +25,7 @@ def get_shot_list():
     shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
+<<<<<<< HEAD
     serial_episode_pattern =["SC", "EP", "S" , "SE", "SER"]
 
     for index, ep_folder in enumerate(folders_list): #get index from list dirs
@@ -45,6 +51,33 @@ def get_shot_list():
 
     # print(episode_list)
     print(shot_db)
+=======
+    episode_size = 0
+
+
+    for episode_index, ep_folder in enumerate(folders_list): #get index from list dirs
+
+        if("SC" in ep_folder or "EP" in ep_folder or "S" or "SE" in ep_folder):
+            episode_list.append(PROJECT_PATH.joinpath(ep_folder))
+
+    episode_size = len(episode_list)
+
+    while(episode_size != 0):
+
+ 
+        os.chdir(episode_list[episode_size-1])
+        print(Path.cwd())
+        episode_size -= 1
+        scan_shot_list = [shot for shot in os.listdir(cur_cwd)] # generator for light  list shots 
+        glob.glob("..")# up to ep list
+
+    for shot_index,shot in enumerate(episode_list):
+        
+            shot_list.append(os.listdir(shot))
+
+               #TODO Dive into shot and append shot name to global path
+            # os.chdir(prew_cwd)
+>>>>>>> b4191ae61ab5c5771f3dcdb817f638aa07d72c7f
     
 
 def last_version_parse(path):
