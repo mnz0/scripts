@@ -37,6 +37,7 @@ def get_shot_list():
                 
 
                 shot_db.append
+                
 
                 os.chdir(r"..")
                 
