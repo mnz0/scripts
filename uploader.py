@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from ctypes import resize
-=======
 from errno import ENETUNREACH
->>>>>>> b4191ae61ab5c5771f3dcdb817f638aa07d72c7f
 import os
 import shutil
 import datetime
@@ -25,7 +21,6 @@ def get_shot_list():
     shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
-<<<<<<< HEAD
     serial_episode_pattern =["SC", "EP", "S" , "SE", "SER"]
 
     for index, ep_folder in enumerate(folders_list): #get index from list dirs
