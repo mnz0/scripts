@@ -5,6 +5,7 @@ import datetime
 from pathlib import Path
 import re
 import json
+from traceback import print_tb
 import glob
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
@@ -20,24 +21,22 @@ def get_shot_list():
     shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
+    serial_episode_pattern =["SC", "EP", "S" , "SE", "SER"]
 
-    serial_episode_pattern =["SC", "EP", "S" , "SE", "SER"] #epidode string pattern
     for index, ep_folder in enumerate(folders_list): #get index from list dirs
         match_pattern = re.search(r"\S+\d+", ep_folder)  
         if(match_pattern):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
             
             prew_cwd = Path.cwd()
-
             try:
                 os.chdir(episode_list[index])
                 shot_db.append(episode_list[index])
                 cur_cwd = Path.cwd()
                 scan_shot_list = [shot for shot in os.listdir(cur_cwd)]
-                current_ep = episode_list[index]
-                Path(current_ep).joinpath(Path(scan_shot_list)
-                
-
+                list(scan_shot_list)
+                for shot in scan_shot_list:
+                    shot_db.append(Path(Path.cwd().joinpath(shot)))
                 os.chdir(r"..")
                 
 
@@ -45,8 +44,7 @@ def get_shot_list():
                 raise IOError ("Can`t open folder " + str(cur_cwd)) from exp 
 
     # print(episode_list)
-    return shot_db                  
-
+    return shot_db
     
 def last_version_parse(path):
     os.chdir(Path(path))
