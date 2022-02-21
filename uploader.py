@@ -7,6 +7,7 @@ import re
 import json
 from traceback import print_tb
 import glob
+import Shot #shot class test 
 
 FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
@@ -21,13 +22,12 @@ def get_shot_list():
     shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
-    serial_episode_pattern =["SC", "EP", "S" , "SE", "SER"]
+    serial_episode_pattern =["SC", "EP", "S", "SE", "SER"]
 
     for index, ep_folder in enumerate(folders_list): #get index from list dirs
         match_pattern = re.search(r"\S+\d+", ep_folder)  
         if(match_pattern):
             episode_list.append(PROJECT_PATH.joinpath(ep_folder))
-            
             prew_cwd = Path.cwd()
             try:
                 os.chdir(episode_list[index])
@@ -38,12 +38,9 @@ def get_shot_list():
                 for shot in scan_shot_list:
                     shot_db.append(Path(Path.cwd().joinpath(shot)))
                 os.chdir(r"..")
-                
-
+                # glob.glob("..") instead chdir? need test on Rulez
             except IOError as exp:
                 raise IOError ("Can`t open folder " + str(cur_cwd)) from exp 
-
-    # print(episode_list)
     return shot_db
     
 def last_version_parse(path):
