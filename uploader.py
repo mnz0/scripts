@@ -5,7 +5,6 @@ import datetime
 from pathlib import Path
 import re
 import json
-from traceback import print_tb
 import glob
 import Shot #shot class test 
 
@@ -13,10 +12,10 @@ FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
 PROJECT_PATH = Path(r"C:\prog\ref\TEST_PROJ\SHOTS") 
 FTP_PROJECT_PATH = Path(r"C:\prog\ref\poj1\ftp") #add row
+RULES_SUBFOLDER  = Path(r".rules")
 
 
 def get_shot_list(): 
-    is_episode = False
     shot_list = []
     episode_list = []
     shot_db = []
