@@ -5,6 +5,10 @@ import pathlib
 import os
 import glob
 
+'''
+
+
+'''
 class Shot:
 
     def __init__(self, shot_name, shot_location):
