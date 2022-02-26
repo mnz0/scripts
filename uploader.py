@@ -5,7 +5,6 @@ import datetime
 from pathlib import Path
 import re
 import json
-from traceback import print_tb
 import glob
 import Shot #shot class test 
 
@@ -13,13 +12,14 @@ FOLDERS_PATTERN = ['SRC', 'RENDER','RESULT']
 RESULT_PATTERN = ['DPX','TIF','DAILIES','JPEG']
 PROJECT_PATH = Path(r"C:\prog\ref\TEST_PROJ\SHOTS") 
 FTP_PROJECT_PATH = Path(r"C:\prog\ref\poj1\ftp") #add row
+RULES_SUBFOLDER  = Path(r".rules")
 
 
 def get_shot_list(): 
-    is_episode = False
     shot_list = []
     episode_list = []
     shot_db = []
+    out_shot_db = []
     os.chdir(PROJECT_PATH)
     folders_list = os.listdir(PROJECT_PATH)
     serial_episode_pattern =["SC", "EP", "S", "SE", "SER"]
@@ -36,12 +36,12 @@ def get_shot_list():
                 scan_shot_list = [shot for shot in os.listdir(cur_cwd)]
                 list(scan_shot_list)
                 for shot in scan_shot_list:
-                    shot_db.append(Path(Path.cwd().joinpath(shot)))
+                    out_shot_db.append(Path(Path.cwd().joinpath(shot)))
                 os.chdir(r"..")
                 # glob.glob("..") instead chdir? need test on Rulez
             except IOError as exp:
                 raise IOError ("Can`t open folder " + str(cur_cwd)) from exp 
-    return shot_db
+    return out_shot_db
     
 def last_version_parse(path):
     os.chdir(Path(path))
