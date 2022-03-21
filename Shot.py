@@ -5,6 +5,10 @@ import glob
 import json
 from pathlib import Path
 
+'''
+
+
+'''
 class Shot:
     
     def __init__(self, shot_name, shot_location, shot_status):
